@@ -1,5 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv");
+const morgan = require("morgan");
 
 // Route files
 const bootcamps = require("./routes/bootcamp");
@@ -8,6 +9,16 @@ const bootcamps = require("./routes/bootcamp");
 dotenv.config({ path: "./config/config.env" });
 
 const app = express();
+
+// Dev logging middleware
+if (process.env.NODE_ENV === "DEVELOPMENT") {
+  app.use(morgan("dev"));
+}
+
+const logger = (req, res, next) => {
+  req.hello = "Hello World";
+  consol;
+};
 
 // Mount routers
 app.use("/api/v1/bootcamps", bootcamps);
